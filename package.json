@@ -1,0 +1,33 @@
+{
+  "name": "pkg-packager",
+  "version": "0.0.0",
+  "description": "Package \"pkg\" based applications into production bundles for Linux, macos, and Windows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc tape test/*"
+  },
+  "keywords": [
+    "pkg",
+    "packager",
+    "bundle",
+    "build",
+    "package",
+    "exe",
+    "app"
+  ],
+  "author": "Joseph Werle <joseph.werle@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "batch": "^0.6.1",
+    "cp-file": "^7.0.0",
+    "debug": "^4.1.1",
+    "mirror-folder": "^3.0.0",
+    "mkdirp": "^0.5.1",
+    "nanoprocess": "^0.7.0",
+    "pkg-fetch": "^2.6.2",
+    "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.0"
+  }
+}
