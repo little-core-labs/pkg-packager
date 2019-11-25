@@ -13,6 +13,7 @@ packager.target('./hello', {
   }]
 })
 
-packager.package((err) => {
+packager.package((err, results) => {
   err && console.log(err)
+  console.log('result', results)
 })
