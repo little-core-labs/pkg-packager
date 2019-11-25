@@ -44,7 +44,7 @@ packager.package((err) => {
 
 ## See Also
 
-- [pkg][ncc]
+- [pkg][pkg]
 - [app-builder][app-builder]
 
 ## License
