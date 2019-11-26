@@ -18,6 +18,7 @@
   "author": "Joseph Werle <joseph.werle@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "appdmg": "^0.6.0",
     "batch": "^0.6.1",
     "cp-file": "^7.0.0",
     "debug": "^4.1.1",
