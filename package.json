@@ -20,6 +20,8 @@
   "dependencies": {
     "appdmg": "^0.6.0",
     "batch": "^0.6.1",
+    "bplist-creator": "0.0.8",
+    "bplist-parser": "^0.2.0",
     "cp-file": "^7.0.0",
     "debug": "^4.1.1",
     "mirror-folder": "^3.0.0",
