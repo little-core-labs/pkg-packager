@@ -1,2 +1,135 @@
 #!/usr/bin/env node
 
+const { version } = require('../package.json')
+const minimist = require('minimist')
+const packager = require('../')
+const debug = require('debug')('pkg-packager')
+const path = require('path')
+const fs = require('fs')
+const os = require('os')
+
+const usage = `usage: pkg-packager [-hDV] [options] <input>
+where options can be:
+
+  -c, --config               Path to JSON configuration
+  -D, --debug                Enable debug output
+      --executable-name      The program executable name
+  -h, --help                 Show this message
+      --product-name         The packaged product name
+      --product-file-name    The packaged product file name
+  -o, --output               Output directory
+  -t, --type                 Packaged output type (appimage|dmg|zip)
+  -V, --version              Output program version
+`
+
+const argv = minimist(process.argv.slice(2), {
+  boolean: [
+    'help',
+    'debug',
+    'version',
+  ],
+
+  string: [
+    'type'
+  ],
+
+  alias: {
+    c: 'config',
+    D: 'debug',
+    h: 'help',
+    o: 'output',
+    t: 'type',
+    V: 'version',
+  },
+
+  default: {
+    output: 'build',
+
+    get type() {
+      if ('linux' === process.platform) {
+        return 'appimage'
+      }
+
+      if ('darwin' === process.platform) {
+        return 'dmg'
+      }
+
+      return 'zip'
+    }
+  }
+})
+
+if (argv.help) {
+  console.log(usage)
+  process.exit(0)
+}
+
+if (argv.version) {
+  console.log(version)
+  process.exit(0)
+}
+
+if (argv.debug) {
+  require('debug').enable('pkg-packager*')
+}
+
+if (0 === argv._.length) {
+  console.log(usage)
+  process.exit(1)
+}
+
+let target = path.resolve(argv._.shift())
+try {
+  target = require.resolve(target)
+} catch (err) {
+  void err
+}
+
+const extname = path.extname(target)
+const basename = path.basename(target)
+const defaultProductName = basename.replace(extname, '')
+
+// defaults
+const opts = {
+  type: argv.type,
+  output: argv.output,
+  productName: defaultProductName,
+  executableName: defaultProductName,
+  productFileName: defaultProductName,
+  icons: [{
+    file: path.resolve(__dirname, '..', 'assets', 'icon.ico'),
+    size: 64
+  }]
+}
+
+if (argv.config && 'string' === typeof argv.config) {
+  try {
+    Object.assign(opts, JSON.parse(fs.readFileSync(argv.config)))
+  } catch (err) {
+    debug(err)
+    console.warn(' warn: Invalid JSON for %s', argv.config)
+  }
+}
+
+if ('product-name' in argv) {
+  opts.productName = argv['product-name']
+}
+
+if ('executable-name' in argv) {
+  opts.executableName = argv['executable-name']
+}
+
+if ('product-file-name' in argv) {
+  opts.productFileName = argv['product-file-name']
+}
+
+packager.target(target, opts)
+packager.package((err, results) => {
+  if (err) {
+    debug(err.stack || err)
+    console.error('error:', err.message)
+    return process.nextTick(process.exit, 1)
+  }
+
+  console.log(results)
+})
