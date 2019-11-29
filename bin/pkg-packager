@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { version } = require('../package.json')
+const { system } = require('pkg-fetch')
 const minimist = require('minimist')
 const packager = require('../')
 const debug = require('debug')('pkg-packager')
@@ -15,6 +16,7 @@ where options can be:
   -D, --debug                Enable debug output
       --executable-name      The program executable name
   -h, --help                 Show this message
+  -p, --platform             The platform type (linux|macos|win) [default: ${system.hostPlatform}]
       --product-name         The packaged product name
       --product-file-name    The packaged product file name
   -o, --output               Output directory
@@ -30,6 +32,10 @@ const argv = minimist(process.argv.slice(2), {
   ],
 
   string: [
+    'executable-name',
+    'platform',
+    'product-name',
+    'product-file-name',
     'type'
   ],
 
@@ -37,6 +43,7 @@ const argv = minimist(process.argv.slice(2), {
     c: 'config',
     D: 'debug',
     h: 'help',
+    p: 'platform',
     o: 'output',
     t: 'type',
     V: 'version',
@@ -93,6 +100,7 @@ const defaultProductName = basename.replace(extname, '')
 const opts = {
   type: argv.type,
   output: argv.output,
+  platform: argv.platform,
   productName: defaultProductName,
   executableName: defaultProductName,
   productFileName: defaultProductName,
