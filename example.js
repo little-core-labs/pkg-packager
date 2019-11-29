@@ -8,7 +8,7 @@ packager.target('./hello.js', {
   executableName: 'hello',
   productFileName: 'Hello',
   icons: [{
-    file: path.resolve('./icon.ico'),
+    file: path.resolve('assets', 'icon.ico'),
     size: 64
   }]
 })

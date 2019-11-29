@@ -23,13 +23,15 @@
     "bplist-creator": "0.0.8",
     "bplist-parser": "^0.2.0",
     "cp-file": "^7.0.0",
+    "cross-zip": "^2.1.6",
     "debug": "^4.1.1",
+    "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
     "nanoprocess": "^0.7.0",
+    "pkg": "^4.4.0",
     "pkg-fetch": "^2.6.2",
-    "rimraf": "^3.0.0",
-    "pkg": "^4.4.0"
+    "rimraf": "^3.0.0"
   },
   "devDependencies": {}
 }
