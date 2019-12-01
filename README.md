@@ -12,30 +12,14 @@ pkg-packager
 ## Installation
 
 ```sh
-$ npm install pkg-packager
+$ npm install pkg-packager -g
 ```
 
 ## Usage
 
-```js
-const packager = require('pkg-packager')
-
-// input can be file or directory
-packager.target('/path/to/pkg/files', {
-  type: 'appimage',
-  output: './build', // build to `build/HelloWorld.AppImage`
-  productName: 'HelloWorld',
-  executableName: 'hello',
-  productFileName: 'HelloWorld',
-  icons: [{
-    file: path.resolve('./icon.ico'),
-    size: 64
-  }]
-})
-
-// package all targets
-packager.package((err) => {
-})
+```sh
+$ pkg-packager *.js -p linux -t appimage -d lib/ --product-name HelloWorld
+$ ./build/linux/x64/HelloWorld.AppImage
 ```
 
 ## API
