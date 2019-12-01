@@ -12,16 +12,19 @@ const os = require('os')
 const usage = `usage: pkg-packager [-hDV] [options] <input>
 where options can be:
 
-  -c, --config               Path to JSON configuration
-  -D, --debug                Enable debug output
-      --executable-name      The program executable name
-  -h, --help                 Show this message
-  -p, --platform             The platform type (linux|macos|win) [default: ${system.hostPlatform}]
-      --product-name         The packaged product name
-      --product-file-name    The packaged product file name
-  -o, --output               Output directory
-  -t, --type                 Packaged output type (appimage|dmg|zip)
-  -V, --version              Output program version
+  -a, --asset                  Path to asset to copy into packaged resources
+  -c, --config                 Path to JSON configuration
+  -d, --directory <from[:to]>  Path to directory to copy into packaged resources
+  -D, --debug                  Enable debug output
+      --executable-name        The program executable name
+  -h, --help                   Show this message
+  -l, --symlink <from:to>      Symlink a file path
+  -p, --platform               The platform type (linux|macos|win) [default: ${system.hostPlatform}]
+      --product-name           The packaged product name
+      --product-file-name      The packaged product file name
+  -o, --output                 Output directory
+  -t, --type                   Packaged output type (appimage|dmg|zip)
+  -V, --version                Output program version
 `
 
 const argv = minimist(process.argv.slice(2), {
@@ -39,10 +42,19 @@ const argv = minimist(process.argv.slice(2), {
     'type'
   ],
 
+  array: [
+    'asset',
+    'directory',
+    'symlink',
+  ],
+
   alias: {
+    a: 'asset',
     c: 'config',
+    d: 'directory',
     D: 'debug',
     h: 'help',
+    l: 'symlink',
     p: 'platform',
     o: 'output',
     t: 'type',
@@ -85,59 +97,120 @@ if (0 === argv._.length) {
   process.exit(1)
 }
 
-let target = path.resolve(argv._.shift())
-try {
-  target = require.resolve(target)
-} catch (err) {
-  void err
+if (argv.directory && !Array.isArray(argv.directory)) {
+  argv.directory = [argv.directory]
 }
 
-const extname = path.extname(target)
-const basename = path.basename(target)
-const defaultProductName = basename.replace(extname, '')
+if (argv.symlink && !Array.isArray(argv.symlink)) {
+  argv.symlink = [argv.symlink]
+}
 
-// defaults
+if (argv.asset && !Array.isArray(argv.asset)) {
+  argv.asset = [argv.asset]
+}
+
 const opts = {
   type: argv.type,
+  debug: argv.debug,
   output: argv.output,
   platform: argv.platform,
-  productName: defaultProductName,
-  executableName: defaultProductName,
-  productFileName: defaultProductName,
   icons: [{
     file: path.resolve(__dirname, '..', 'assets', 'icon.ico'),
     size: 64
-  }]
+  }],
+
+  assets: Array.from(argv.asset || []),
+  symlinks: Array.from(argv.symlink || []),
+  directories: Array.from(argv.directory || [])
 }
 
 if (argv.config && 'string' === typeof argv.config) {
   try {
-    Object.assign(opts, JSON.parse(fs.readFileSync(argv.config)))
+    const config = JSON.parse(fs.readFileSync(argv.config))
+    if (config.pkg && config.pkg.packager) {
+      let { assets, symlinks, directories } = config.pkg.packager
+      if (Array.isArray(assets)) {
+        assets = opts.assets.concat(...assets)
+      }
+
+      if (Array.isArray(symlinks)) {
+        symlinks = opts.symlinks.concat(...symlinks)
+      }
+
+      if (Array.isArray(directories)) {
+        directories = opts.directories.concat(...directories)
+      }
+
+      Object.assign(opts, config.pkg.packager)
+
+      if (Array.isArray(assets)) {
+        Object.assign(opts, { assets })
+      }
+
+      if (Array.isArray(symlinks)) {
+        Object.assign(opts, { symlinks })
+      }
+
+      if (Array.isArray(directories)) {
+        Object.assign(opts, { directories })
+      }
+    }
+
+    if (config.pkg && Array.isArray(config.pkg.assets)) {
+      opts.assets = opts.assets.concat(...config.pkg.assets)
+    }
   } catch (err) {
     debug(err)
     console.warn(' warn: Invalid JSON for %s', argv.config)
   }
 }
 
-if ('product-name' in argv) {
-  opts.productName = argv['product-name']
+let defaultProductName = null
+for (let target of argv._) {
+  try {
+    target = require.resolve(target)
+  } catch (err) {
+    void err
+  }
+
+  if (!defaultProductName) {
+    const extname = path.extname(target)
+    const basename = path.basename(target)
+    defaultProductName = basename.replace(extname, '')
+  }
+
+  // defaults
+  Object.assign(opts, {
+    productName: defaultProductName,
+    executableName: defaultProductName,
+    productFileName: defaultProductName,
+  })
+
+  if ('product-name' in argv) {
+    opts.productName = argv['product-name']
+    if (!opts.productFileName || defaultProductName === opts.productFileName) {
+      opts.productFileName = opts.productName
+    }
+  }
+
+  if ('executable-name' in argv) {
+    opts.executableName = argv['executable-name']
+  }
+
+  if ('product-file-name' in argv) {
+    opts.productFileName = argv['product-file-name']
+  }
+
+  packager.target(target, opts)
 }
 
-if ('executable-name' in argv) {
-  opts.executableName = argv['executable-name']
-}
-
-if ('product-file-name' in argv) {
-  opts.productFileName = argv['product-file-name']
-}
-
-packager.target(target, opts)
-packager.package((err, results) => {
+packager.package({ config: argv.config }, (err, results) => {
   if (err) {
     debug(err.stack || err)
     console.error('error:', err.message)
     return process.nextTick(process.exit, 1)
   }
 
+  results = results.filter(Boolean)
   console.log(results)
 })

@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Package \"pkg\" based applications into production bundles for Linux, macos, and Windows.",
   "main": "index.js",
+  "bin": {
+    "pkg-packager": "bin/pkg-packager"
+  },
   "scripts": {
     "test": "nyc tape test/*"
   },
@@ -23,8 +26,10 @@
     "bplist-creator": "0.0.8",
     "bplist-parser": "^0.2.0",
     "cp-file": "^7.0.0",
+    "cpy": "^7.3.0",
     "cross-zip": "^2.1.6",
     "debug": "^4.1.1",
+    "glob": "^7.1.6",
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
