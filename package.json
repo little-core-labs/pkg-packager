@@ -20,8 +20,12 @@
   ],
   "author": "Joseph Werle <joseph.werle@gmail.com>",
   "license": "MIT",
+  "optionalDependencies": {
+    "appdmg": "^0.6.0"
+  },
   "dependencies": {
-    "appdmg": "^0.6.0",
+    "7zip-bin": "^5.0.3",
+    "app-builder-bin": "^3.5.1",
     "batch": "^0.6.1",
     "bplist-creator": "0.0.8",
     "bplist-parser": "^0.2.0",
@@ -33,7 +37,7 @@
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
-    "nanoprocess": "^0.8.0",
+    "nanoprocess": "^0.8.1",
     "pkg": "^4.4.0",
     "pkg-fetch": "^2.6.2",
     "rimraf": "^3.0.0"
