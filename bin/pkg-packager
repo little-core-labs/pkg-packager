@@ -19,10 +19,10 @@ where options can be:
       --executable-name        The program executable name
   -h, --help                   Show this message
   -l, --symlink <from:to>      Symlink a file path
-  -p, --platform               The platform type (linux|macos|win) [default: ${system.hostPlatform}]
-      --product-name           The packaged product name
-      --product-file-name      The packaged product file name
   -o, --output                 Output directory
+  -p, --platform               The platform type (linux|macos|win) [default: ${system.hostPlatform}]
+      --product-file-name      The packaged product file name
+      --product-name           The packaged product name
   -t, --type                   Packaged output type (appimage|dmg|zip)
   -V, --version                Output program version
 `
