@@ -12,7 +12,7 @@ const os = require('os')
 const usage = `usage: pkg-packager [-hDV] [options] <input>
 where options can be:
 
-  -a, --asset                  Path to asset to copy into packaged resources
+  -a, --asset <from[:to]>      Path to asset to copy into packaged resources
   -c, --config                 Path to JSON configuration
   -d, --directory <from[:to]>  Path to directory to copy into packaged resources
   -D, --debug                  Enable debug output
