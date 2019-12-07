@@ -1,9 +1,8 @@
-const packager = require('./')
+const packager = require('../')
 const path = require('path')
 
-packager.target('./hello.js', {
-  type: 'appimage',
-  output: './build',
+packager.target(path.resolve(__dirname, 'hello.js'), {
+  output: 'build',
   productName: 'hello',
   executableName: 'hello',
   productFileName: 'Hello',
