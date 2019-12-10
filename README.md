@@ -1,7 +1,7 @@
 pkg-packager
 ============
 
-> Package pkg (@zeit/pkg) based applications into production bundles for Linux, macOS, and Windows.
+> Package pkg ([@zeit/pkg][pkg]) based applications into production bundles for Linux, macOS, and Windows.
 
 ## Status
 
@@ -12,28 +12,42 @@ pkg-packager
 ## Installation
 
 ```sh
-$ npm install pkg-packager -g
+$ npm install pkg-packager
 ```
 
 ## Usage
 
-```sh
-$ pkg-packager *.js -p linux -t appimage -d lib/ --product-name HelloWorld
-$ ./build/linux/x64/HelloWorld.AppImage
-```
+> TODO
 
 ## API
 
 > TODO
 
+## Builders
+
+> TODO
+
+### Built-in
+
+- [ZIP](./lib/builders/default/zip) (_all platforms_)
+- [TAR](./lib/builders/default/tar) (_all platforms_) **coming soon**
+
+### External
+
+- [AppImage][pkg-packager-appimage] (_Linux only_)
+- [DMG][pkg-packager-dmg] (_macOS only)
+
 ## See Also
 
-- [pkg][pkg]
 - [app-builder][app-builder]
+- [pkg][pkg]
+- [pkg-packager-cli][pkg-packager-cli]
 
 ## License
 
 MIT
 
-[pkg]: https://github.com/zeit/pkg
 [app-builder]: https://github.com/develar/app-builder
+[pkg]: https://github.com/zeit/pkg
+[pkg-packager-appimage]: https://github.com/little-core-labs/pkg-packager-appimage
+[pkg-packager-cli]: https://github.com/little-core-labs/pkg-packager-cli
