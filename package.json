@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "description": "Package \"pkg\" based applications into production bundles for Linux, macos, and Windows.",
   "main": "index.js",
-  "bin": {
-    "pkg-packager": "bin/pkg-packager"
-  },
   "scripts": {
     "test": "nyc tape test/*"
   },
