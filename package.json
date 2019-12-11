@@ -17,16 +17,8 @@
   ],
   "author": "Joseph Werle <joseph.werle@gmail.com>",
   "license": "MIT",
-  "optionalDependencies": {
-    "appdmg": "^0.6.0"
-  },
   "dependencies": {
-    "7zip-bin": "^5.0.3",
-    "app-builder-bin": "^3.5.1",
     "batch": "^0.6.1",
-    "bplist-creator": "0.0.8",
-    "bplist-parser": "^0.2.0",
-    "cp-file": "^7.0.0",
     "cpy": "^7.3.0",
     "cross-zip": "^2.1.6",
     "debug": "^4.1.1",
@@ -34,7 +26,6 @@
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
-    "nanoprocess": "^0.8.1",
     "pkg": "^4.4.0",
     "pkg-fetch": "^2.6.2",
     "pkg-packager-appimage": "^0.1.0",
