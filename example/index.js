@@ -5,11 +5,7 @@ packager.target(path.resolve(__dirname, 'hello.js'), {
   output: 'build',
   productName: 'hello',
   executableName: 'hello',
-  productFileName: 'Hello',
-  icons: [{
-    file: path.resolve('assets', 'icon.ico'),
-    size: 64
-  }]
+  productFileName: 'Hello'
 })
 
 packager.package((err, results) => {

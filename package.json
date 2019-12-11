@@ -23,6 +23,7 @@
     "cross-zip": "^2.1.6",
     "debug": "^4.1.1",
     "glob": "^7.1.6",
+    "isbinaryfile": "^4.0.2",
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
