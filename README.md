@@ -87,6 +87,15 @@ resolved to a location on the file system and `opts` can be:
                                      // loading a builder. The default value
                                      // depends on `process.platform`.
 
+  productName: null,                 // The name of the packaged product
+                                     // a builder will produce. This could be
+                                     // the name of the file (with or without
+                                     // the extension name) or internal
+                                     // metadata embedded into a file to
+                                     // detail product information. The
+                                     // usage of this property should be
+                                     // documented by the builder you use.
+
   symlinks: [],                      // An array of symlinks in the form of
                                      // `{from: '..', to: '..'}` to
                                      // indicate the source and destination
