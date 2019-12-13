@@ -27,6 +27,7 @@
     "minimist": "^1.2.0",
     "mirror-folder": "^3.0.0",
     "mkdirp": "^0.5.1",
+    "nanoresource": "^1.3.0",
     "pkg": "^4.4.0",
     "pkg-fetch": "^2.6.2",
     "pkg-packager-appdmg": "0.0.1",
