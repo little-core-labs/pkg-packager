@@ -139,8 +139,8 @@ will be called when packaging is complete or when an error occurs. The value of
 
 ## Builders
 
-The `pkg-packager` comes built-in and pre-installed builders to use out
-of the box.
+The `pkg-packager` comes built-in and pre-installed builders to use out of the
+box.
 
 ### Built-in
 

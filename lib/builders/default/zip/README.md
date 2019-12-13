@@ -6,7 +6,7 @@ pkg-packager ZIP Builder (built-in)
 ## Usage
 
 ```js
-packager.target('./path/to/module/, {
+packager.target('./path/to/module/', {
   productName: 'Bundle',
   type: 'zip'
 })
