@@ -29,6 +29,8 @@
     "mkdirp": "^0.5.1",
     "pkg": "^4.4.0",
     "pkg-fetch": "^2.6.2",
+    "pkg-packager-appdmg": "0.0.1",
+    "pkg-packager-appimage": "^0.1.2",
     "rimraf": "^3.0.0"
   },
   "devDependencies": {}
