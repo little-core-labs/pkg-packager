@@ -160,7 +160,7 @@ box.
 
 - [.AppImage][pkg-packager-appimage] (_Linux only_)
 - [.dmg (.app)][pkg-packager-appdmg] (_macOS only)
-- [.exe][pkg-packager-exe] (_Windows only) **coming soon**
+- [.exe][pkg-packager-exe] (_Windows only_) **coming soon**
 
 ## See Also
 
@@ -174,6 +174,7 @@ MIT
 
 [app-builder]: https://github.com/develar/app-builder
 [pkg]: https://github.com/zeit/pkg
-[pkg-packager-appimage]: https://github.com/little-core-labs/pkg-packager-appimage
 [pkg-packager-appdmg]: https://github.com/little-core-labs/pkg-packager-appdmg
+[pkg-packager-appimage]: https://github.com/little-core-labs/pkg-packager-appimage
+[pkg-packager-exer]: https://github.com/little-core-labs/pkg-packager-exe
 [pkg-packager-cli]: https://github.com/little-core-labs/pkg-packager-cli
