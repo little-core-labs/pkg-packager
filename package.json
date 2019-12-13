@@ -4,7 +4,7 @@
   "description": "Package \"pkg\" based applications into production bundles for Linux, macos, and Windows.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc tape test/*"
+    "test": ":"
   },
   "keywords": [
     "pkg",
