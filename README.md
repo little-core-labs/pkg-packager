@@ -176,5 +176,5 @@ MIT
 [pkg]: https://github.com/zeit/pkg
 [pkg-packager-appdmg]: https://github.com/little-core-labs/pkg-packager-appdmg
 [pkg-packager-appimage]: https://github.com/little-core-labs/pkg-packager-appimage
-[pkg-packager-exer]: https://github.com/little-core-labs/pkg-packager-exe
+[pkg-packager-exe]: https://github.com/little-core-labs/pkg-packager-exe
 [pkg-packager-cli]: https://github.com/little-core-labs/pkg-packager-cli
